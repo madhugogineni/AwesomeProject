@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StackActions, NavigationActions } from 'react-navigation';
+
 import ListItem from './ListItem';
 import { ClassTableItemSeperator } from './ClassTableItemSeperator';
 import ListHeader from './ListHeader';
-import AddStudentModal from './AddStudentModal';
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
     android:
@@ -11,11 +12,10 @@ const instructions = Platform.select({
         'Shake or press menu button for dev menu',
 });
 
-
-
 type Props = {};
 export default class App extends Component<Props> {
 
+    focusListener;
     static navigationOptions = {
         title: 'Classes'
     };
@@ -24,7 +24,6 @@ export default class App extends Component<Props> {
         this.state = {
             text: "",
             data: [],
-            isAddStudentModalOpened: false,
         };
         this.handleAddClassButtonClick = this.handleAddClassButtonClick.bind(this);
         this.deleteClass = this.deleteClass.bind(this);
@@ -32,8 +31,13 @@ export default class App extends Component<Props> {
     componentWillMount() {
         this.fetchData();
     }
+    componentDidUpdate() {
+        console.log("welcome from component did update");
+        this.fetchData();
+    }
+
     deleteClass(cid) {
-        fetch("http://192.168.10.169:3500/delete", {
+        fetch("http://testbed2.riktamtech.com:3000/delete", {
             method: "POST",
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -43,7 +47,8 @@ export default class App extends Component<Props> {
         this.fetchData();
     }
     fetchData() {
-        fetch("http://192.168.10.169:3500/home")
+        console.log("fetchdata ");
+        fetch("http://testbed2.riktamtech.com:3000/home")
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({ data: responseJson.data });
@@ -57,14 +62,10 @@ export default class App extends Component<Props> {
     }
     render() {
         console.log(this.state.data);
-        // const AddStudentModalVar;
-        // if (this.state.isAddStudentModalOpened == true) {
-        //   AddStudentModalVar = <AddStudentModal />
-        // }
-
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.mainview}>
-                <TouchableOpacity style={styles.addbutton} onPress={() => this.handleAddClassButtonClick()}>
+                <TouchableOpacity style={styles.addbutton} onPress={() => this.props.navigation.navigate('AddClass')}>
                     <Text style={{ color: 'white' }}>Add Class</Text>
                 </TouchableOpacity>
                 <ScrollView style={styles.scrollview} horizontal={true}>
@@ -75,7 +76,6 @@ export default class App extends Component<Props> {
                         ItemSeparatorComponent={ClassTableItemSeperator}
                         keyExtractor={(item) => item.cid + ""} />
                 </ScrollView>
-                {/* {AddStudentModalVar} */}
             </View >
         );
     }
@@ -90,9 +90,9 @@ const styles = StyleSheet.create({
     addbutton: {
         width: 200,
         height: 40,
-        alignItems: 'center',
         alignSelf: 'center',
-        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: 'steelblue',
     },
     scrollview: {
