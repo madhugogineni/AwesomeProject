@@ -29,7 +29,7 @@ export default class App extends Component<Props> {
     this.fetchData();
   }
   deleteClass(cid) {
-    fetch("http://192.168.10.169:3500/delete", {
+    fetch("http://testbed2.ritkamtech.com:3000/delete", {
       method: "POST",
       headers: new Headers({
         'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ export default class App extends Component<Props> {
     this.fetchData();
   }
   fetchData() {
-    fetch("http://192.168.10.169:3500/home")
+    fetch("http://testbed2.riktamtech.com:3000/home")
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ data: responseJson.data });
@@ -53,11 +53,6 @@ export default class App extends Component<Props> {
   }
   render() {
     console.log(this.state.data);
-    const AddStudentModalVar;
-    if (this.state.isAddStudentModalOpened == true) {
-      AddStudentModalVar = <AddStudentModal />
-    }
-
     return (
       <View style={styles.mainview}>
         <TouchableOpacity style={styles.addbutton} onPress={() => this.handleAddClassButtonClick()}>
@@ -71,7 +66,6 @@ export default class App extends Component<Props> {
             ItemSeparatorComponent={ClassTableItemSeperator}
             keyExtractor={(item) => item.cid + ""} />
         </ScrollView>
-        {AddStudentModalVar}
       </View >
     );
   }
