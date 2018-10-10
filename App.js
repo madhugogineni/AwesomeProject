@@ -3,6 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import Classes from './components/Classes';
 import AddClass from './components/AddClass';
 import EditClass from './components/EditClass';
+import Students from './components/Students';
 const RootStack = StackNavigator(
   {
     Classes: {
@@ -13,7 +14,10 @@ const RootStack = StackNavigator(
     },
     EditClass: {
       screen: EditClass
-    }
+    },
+    Students: {
+      screen: Students
+    },
   },
   {
     initialRouteName: 'Classes',

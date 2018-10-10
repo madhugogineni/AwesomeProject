@@ -1,33 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-export default class ListItem extends React.Component {
+import { withNavigation } from 'react-navigation';
+import EditClass from './EditClass';
+class ListItem extends React.Component {
     constructor(props) {
         super(props);
         this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
-        this.redirectToEditClass = this.redirectToEditClass.bind(this);
     }
     handleDeleteButtonClick() {
         this.props.deleteAction(this.props.data.cid);
     }
-
-    redirectToEditClass(classSelected) {
-        const navigate = this.props.navigation;
-        navigate('EditClass', { selectedClass: this.props.data });
-    }
     render() {
-        let navigate = this.props.navigation;
+        console.log(this.props.data);
         return (
             <View style={styles.flatlist_item}>
                 <Text style={styles.cid_text}>{this.props.data.cid}</Text>
                 <Text style={styles.cname_text}>{this.props.data.cname}</Text>
-                <TouchableOpacity style={styles.view_button_style}><Text>View</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.edit_button_style} onPress={this.redirectToEditClass}><Text>Edit</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.delete_button_style} onPress={this.handleDeleteButtonClick}><Text>Delete</Text></TouchableOpacity>
-            </View>
+                <TouchableOpacity style={styles.view_button_style} onPress={() => this.props.navigation.navigate('Students', {cid: this.props.data.cid})}><Text>View</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.edit_button_style} onPress={() => this.props.navigation.navigate('EditClass', { data: this.props.data })}><Text>Edit</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.delete_button_style} onPress={this.handleDeleteButtonClick}><Text>Delete</Text></TouchableOpacity>
+            </View >
         )
     }
 }
-
+export default withNavigation(ListItem);
 const styles = StyleSheet.create({
     flatlist_item: {
         flex: 1,

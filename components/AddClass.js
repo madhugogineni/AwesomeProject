@@ -19,7 +19,6 @@ class AddClass extends React.Component {
         });
         this.props.navigation.goBack();
     }
-
     render() {
         return (
             <View style={styles.mainview}>
@@ -28,7 +27,7 @@ class AddClass extends React.Component {
                 <TouchableOpacity style={styles.submitbutton} onPress={this.handleAddStudentButtonClick}>
                     <Text style={{
                         color: 'white'
-                    }}>Add Student</Text>
+                    }}>Add Class</Text>
                 </TouchableOpacity>
             </View>
         )

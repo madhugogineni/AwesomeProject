@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import { StackActions, NavigationActions } from 'react-navigation';
-
 import ListItem from './ListItem';
 import { ClassTableItemSeperator } from './ClassTableItemSeperator';
 import ListHeader from './ListHeader';
+
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
     android:
