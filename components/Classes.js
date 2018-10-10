@@ -31,9 +31,10 @@ export default class App extends Component<Props> {
     componentWillMount() {
         this.fetchData();
     }
-    componentDidUpdate() {
-        console.log("welcome from component did update");
-        this.fetchData();
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.navigation != this.props.navigation) {
+            this.fetchData();
+        }
     }
 
     deleteClass(cid) {
