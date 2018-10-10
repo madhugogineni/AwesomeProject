@@ -4,6 +4,8 @@ import Classes from './components/Classes';
 import AddClass from './components/AddClass';
 import EditClass from './components/EditClass';
 import Students from './components/Students';
+import AddStudent from './components/AddStudent';
+import EditStudent from './components/EditStudent';
 const RootStack = StackNavigator(
   {
     Classes: {
@@ -18,6 +20,12 @@ const RootStack = StackNavigator(
     Students: {
       screen: Students
     },
+    AddStudent: {
+      screen: AddStudent
+    },
+    EditStudent: {
+      screen: EditStudent
+    }
   },
   {
     initialRouteName: 'Classes',

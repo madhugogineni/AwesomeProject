@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 export default class EditClass extends React.Component {
+    static navigationOptions = {
+        title: 'Edit Class'
+    };
     constructor(props) {
         super(props);
         this.state = {

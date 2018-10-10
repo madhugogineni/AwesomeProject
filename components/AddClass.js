@@ -2,14 +2,17 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, NavigationActions } from 'react-native';
 
 class AddClass extends React.Component {
+    static navigationOptions = {
+        title: 'Add Class'
+    };
     constructor(props) {
         super(props);
         this.state = {
             cname: ""
         }
-        this.handleAddStudentButtonClick = this.handleAddStudentButtonClick.bind(this);
+        this.handleAddClassButtonClick = this.handleAddClassButtonClick.bind(this);
     }
-    handleAddStudentButtonClick() {
+    handleAddClassButtonClick() {
         fetch("http://testbed2.riktamtech.com:3000/add", {
             method: 'POST',
             headers: new Headers({
@@ -24,7 +27,7 @@ class AddClass extends React.Component {
             <View style={styles.mainview}>
                 <Text style={styles.inputlabel}>Cid</Text>
                 <TextInput style={styles.textinput} placeholder="Enter the class name here" onChangeText={(text) => this.setState({ cname: text })}></TextInput>
-                <TouchableOpacity style={styles.submitbutton} onPress={this.handleAddStudentButtonClick}>
+                <TouchableOpacity style={styles.submitbutton} onPress={this.handleAddClassButtonClick}>
                     <Text style={{
                         color: 'white'
                     }}>Add Class</Text>

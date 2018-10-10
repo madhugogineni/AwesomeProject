@@ -14,7 +14,6 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
 
-    focusListener;
     static navigationOptions = {
         title: 'Classes'
     };
@@ -25,7 +24,6 @@ export default class App extends Component<Props> {
             data: [],
         };
         this.handleAddClassButtonClick = this.handleAddClassButtonClick.bind(this);
-        this.deleteClass = this.deleteClass.bind(this);
     }
     componentWillMount() {
         this.fetchData();
@@ -36,16 +34,7 @@ export default class App extends Component<Props> {
         }
     }
 
-    deleteClass(cid) {
-        fetch("http://testbed2.riktamtech.com:3000/delete", {
-            method: "POST",
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            }),
-            body: JSON.stringify({ "cid": cid })
-        });
-        this.fetchData();
-    }
+
     fetchData() {
         console.log("fetchdata ");
         fetch("http://testbed2.riktamtech.com:3000/home")
@@ -71,7 +60,7 @@ export default class App extends Component<Props> {
                 <ScrollView style={styles.scrollview} horizontal={true}>
                     <FlatList
                         data={this.state.data}
-                        renderItem={({ item }) => <ListItem data={item} deleteAction={this.deleteClass} />}
+                        renderItem={({ item }) => <ListItem data={item} />}
                         ListHeaderComponent={<ListHeader />}
                         ItemSeparatorComponent={ClassTableItemSeperator}
                         keyExtractor={(item) => item.cid + ""} />
@@ -85,7 +74,7 @@ const styles = StyleSheet.create({
     mainview: {
         flex: 1,
         flexDirection: 'column',
-        marginTop: 150
+        marginTop: 100
     },
     addbutton: {
         width: 200,
