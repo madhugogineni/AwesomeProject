@@ -17,7 +17,7 @@ class AddClass extends React.Component {
             }),
             body: JSON.stringify({ "cname": this.state.cname })
         });
-        this.props.navigation.goBack();
+        this.props.navigation.navigate('Classes',{datachanged: "true"});
     }
     render() {
         return (

@@ -17,7 +17,7 @@ export default class EditClass extends React.Component {
             }),
             body: JSON.stringify({ "cid": this.state.cid, "cname": this.state.cname })
         });
-        this.props.navigation.navigate('Classes');
+        this.props.navigation.navigate('Classes',{classChanged: "true"});
     }
     render() {
         return (
